@@ -28,6 +28,11 @@ public class IR_Sensor extends Main{
 		//closes out of robot
 		Robot.close();
 	}
+	//for rotate and return test
+	public static void rotateandreturn(int a) {
+		rotate(a);
+		rotate(0);
+	}
 	//checks for IR Beacons and returns there letter and angle
 	public static String ScanIR(int cur_angle) {
 		//RFIDSensor IR= new RFIDSensor(); //makes IR sensors object named IR
