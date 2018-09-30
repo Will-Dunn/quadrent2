@@ -6,13 +6,15 @@ public class IR_Sensor extends Main{
 	private static int timeatangle=1;
 	private static RFIDSensor IR = new RFIDSensor();
 	public static void main(String[] args) {
-		for(int i=0;i<180;i++) {
+		for(int i=0;i<180;i+=5) {
 			rotate(i);
 			//angle=i;
 			if(ScanIR(i)!="") {
 				System.out.println(ScanIR(i));
 			}
+		
 		}
+		rotate(0);
 	}
 	//rotates motor to angle
 	public static void rotate(int angle) {
@@ -24,15 +26,16 @@ public class IR_Sensor extends Main{
 		//servo is to be wired to digital pin 9
 		Robot.attachServo(RXTXRobot.SERVO1, 9);//connects the servo's format is the servo's name followed by pin #
 		//rotates to angle a for time specified by var timeatangle  
-		Robot.runPCAServo(9, a, timeatangle*1000);
+		Robot.runPCAServo(9, angle , timeatangle*1000);
 		//closes out of robot
 		Robot.close();
 	}
-	//for rotate and return test
+	//for rotate and return test only not good code
 	public static void rotateandreturn(int a) {
 		rotate(a);
 		rotate(0);
 	}
+	
 	//checks for IR Beacons and returns there letter and angle
 	public static String ScanIR(int cur_angle) {
 		//RFIDSensor IR= new RFIDSensor(); //makes IR sensors object named IR
