@@ -2,7 +2,7 @@
 
 import rxtxrobot.*;
 
-public class RunOneMotor
+public class RunMotors
 {
 	public static void main(String[] args)
 	{
