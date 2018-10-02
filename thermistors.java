@@ -22,7 +22,7 @@ public class thermistors {
 			
 			
 		}
-		double tempc=-.4127*(tempsum/numbmes)+65.99;
+		double tempc=-.4127*(tempsum/numbmes)+64;
 		System.out.println("the temperature is: " + tempc );
 		r.close();
 }
