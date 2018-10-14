@@ -31,7 +31,7 @@ public class RunMotors
 
 		//Runs a motor on channel 2 at speed 100 and a motor on channel 3 at speed -200 for 5000 milliseconds
 		//.runTwoPCAMotor(7, -400, 5, 400, 5000);
-		if(test==1) {
+		while(test==1) {
 			contrun();
 		}
 		else
@@ -56,17 +56,26 @@ public class RunMotors
 		
 	}
 	public static void contrun() {
-		while(!ping()) {
-			Robot.runTwoPCAMotor(motor1pin, speed1,motor2pin,speed2, 5);
-		}
-		Robot.allPCAStop();
-	}
- 	public static void turn() {
-		if (ping(20)==true) {
-			Robot.runTwoPCAMotor(motor1pin, -speed1, motor2pin, speed2, 1000);
-			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 1000);
-			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, -speed2, 1000);
-			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 1000);
+		int numturns=0;
+		if(!ping()){
+			Robot.runTwoPCAMotor(motor1pin, speed1,motor2pin,speed2, 5);}
+		if(ping()){
+			turn();
+			
+			
 			
 		}
+		else{
+		Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, -speed2, 5*numturns);}
+		
+		//Robot.allPCAStop();
+	}
+ 	public static void turn() {
+		
+			Robot.runTwoPCAMotor(motor1pin, -speed1, motor2pin, speed2, 100);
+			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 200);
+			//Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, -speed2, 100);
+			//Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 1000);
+			
+		
 }
