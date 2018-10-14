@@ -61,4 +61,11 @@ public class RunMotors
 		}
 		Robot.allPCAStop();
 	}
+ 	public static void turn() {
+		if (ping(20)==true) {
+			Robot.runTwoPCAMotor(motor1pin, -speed1, motor2pin, speed2, 1000);
+			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 1000);
+			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, -speed2, 1000);
+			
+		}
 }
