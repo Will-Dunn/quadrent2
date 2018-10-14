@@ -66,6 +66,7 @@ public class RunMotors
 			Robot.runTwoPCAMotor(motor1pin, -speed1, motor2pin, speed2, 1000);
 			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 1000);
 			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, -speed2, 1000);
+			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 1000);
 			
 		}
 }
