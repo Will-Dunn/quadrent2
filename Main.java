@@ -16,6 +16,8 @@ public class Main {
 	//private static Servomotors Irmotor=new Servomotors(); 
 	public static void main(String[] args) {
 		
+		angles();
+		triangulate();
 		
 		/*switch(test)
 		{
@@ -59,6 +61,7 @@ public class Main {
 		}
 		if(!IRReadOut.ScanIR().equals("")&&b1d==false) {
 			beacon1=new beacon(a,IRReadOut.ScanIR());
+			System.out.println("beacon1 recorded at: "+a+" with tag: "+IRReadOut.ScanIR());
 			b1d=true;
 			
 			
@@ -66,6 +69,7 @@ public class Main {
 		}
 		if(!IRReadOut.ScanIR().equals("")&&b1d==true&&b2d==false) {
 			beacon2=new beacon(a,IRReadOut.ScanIR());
+			System.out.println("beacon2 recorded at: "+a+" with tag: "+IRReadOut.ScanIR());
 			b2d=true;
 			
 			
@@ -73,6 +77,7 @@ public class Main {
 		}
 		if(!IRReadOut.ScanIR().equals("")&&b1d==true&&b2d==true) {
 			beacon3=new beacon(a,IRReadOut.ScanIR());
+			System.out.println("beacon3 recorded at: "+a+" with tag: "+IRReadOut.ScanIR());
 			b2d=false;
 			b1d=true;
 			
