@@ -12,7 +12,7 @@ public class Servomotors extends Main {
 		Robot.sleep(1000);
 		Robot.runPCAServo(11, a );
 		Robot.sleep(1000);
-		Robot.runPCAServo(11, 10 );
+		//Robot.runPCAServo(11, 10 );
 		Robot.sleep(1000);
 		Robot.close();
 	}
