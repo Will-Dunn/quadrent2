@@ -4,13 +4,13 @@ import rxtxrobot.RXTXRobot;
 public class RunMotors
 {	private static RXTXRobot Robot = new ArduinoNano(); // Create RXTXRobot object
 	//time should be set to the length of time required to move 3 meters.
-	private static int time=4290;
+	private static int time=2500;
 	//motor1pin is the pin motor 1 is wired to.
 	private static int motor1pin=5;
 	//motor2pin is the pin motor 2 is wired to.
 	private static int motor2pin=7;
 	//speed1 is the speed motor 1 will move at.
-	private static int speed1=-145;
+	private static int speed1=-300;
 	//speed2 is the speed motor 2 will move at.
 	private static int speed2=500;
 	//Pingpin is the pin at which the ping sensor is wired.
@@ -34,6 +34,21 @@ public class RunMotors
 		while(test==1) {
 			contrun();
 		}
+		if (test==2) {
+			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, time);
+		//urn
+		//ry {Thread.sleep(500);}
+		/*atch (InterruptedException ex){Thread.currentThread().interrupt();}
+			Robot.runTwoPCAMotor(motor1pin, -250, motor2pin, 0, 500);
+			
+			//y {Thread.sleep(500);}
+	//catch (InterruptedException ex){Thread.currentThread().interrupt();}
+	//Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, time);*/
+			Robot.close();
+		}
+		if (test == 3) {
+			turn();
+		}
 		else
 			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, time);
 		Robot.close();
@@ -47,7 +62,7 @@ public class RunMotors
 	public static boolean ping() {
 		//for (int x=0; x < 20; ++x)
 	//	{
-		System.out.println(Robot.getPing(Pingpin));
+		
 			if(Robot.getPing(Pingpin)<20)
 				return true;
 			//Robot.sleep(300);
@@ -56,26 +71,36 @@ public class RunMotors
 		
 	}
 	public static void contrun() {
-		int numturns=0;
-		if(!ping()){
-			Robot.runTwoPCAMotor(motor1pin, speed1,motor2pin,speed2, 5);}
-		if(ping()){
-			turn();
-			
-			
-			
+	int numturns=0;
+	while(!ping()) {
+			Robot.runTwoPCAMotor(motor1pin, speed1,motor2pin,speed2, 5);
+			System.out.println("movingforward");
 		}
-		else{
-		Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, -speed2, 5*numturns);}
+	if(ping()) {
 		
-		//Robot.allPCAStop();
+		turn();
+		numturns++;
 	}
- 	public static void turn() {
+	else {
+	System.out.println("turning back");
+	Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 200);
+	Robot.runTwoPCAMotor(motor1pin,-speed1, motor2pin, speed2,100*numturns);
+	}
 		
-			Robot.runTwoPCAMotor(motor1pin, -speed1, motor2pin, speed2, 100);
-			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 200);
-			//Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, -speed2, 100);
-			//Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 1000);
+				
 			
 		
+		//rn();
+		//bot.allPCAStop();
+	}
+	public static void turn() {
+	//f (ping()) {
+			Robot.runTwoPCAMotor(motor1pin,speed1, motor2pin,-speed2, 100);
+			System.out.println("turning "+Robot.getPing(Pingpin));
+			Robot.sleep(2000);
+			
+			
+	
+		
+	}
 }
