@@ -4,17 +4,32 @@ import rxtxrobot.*;
 public class Servomotors extends Main {
 	public static RXTXRobot Robot = new ArduinoNano();
 	
+	public static void RunServo(int angle) {
+		Robot.setPort("COM6");	
+		Robot.connect();
+		
+		Robot.runPCAServo(11, 10 ); 
+		Robot.sleep(1000);
+		Robot.runPCAServo(11, angle);
+		Robot.sleep(1000);
+		Robot.runPCAServo(11, 10 );
+		Robot.sleep(1000);
+		Robot.close();
+	}
+	
+	/*
 	public static void main(String[] args, int a) {
 		Robot.setPort("COM6");	
 		Robot.connect();
 		
-		Robot.runPCAServo(11, 10 );
+		Robot.runPCAServo(11, 10 ); 
 		Robot.sleep(1000);
 		Robot.runPCAServo(11, a );
 		Robot.sleep(1000);
-		//Robot.runPCAServo(11, 10 );
+		Robot.runPCAServo(11, 10 );
 		Robot.sleep(1000);
 		Robot.close();
+		
 	}
 	public static void rotate(int angle) {
 		//robot is the Arduino board instantiated in Main class
@@ -28,5 +43,5 @@ public class Servomotors extends Main {
 		
 		//closes out of robot
 		//Robot.close();
+	*/
 	}
-}
