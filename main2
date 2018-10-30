@@ -1,0 +1,170 @@
+
+import rxtxrobot.ArduinoNano;
+import rxtxrobot.RFIDSensor;
+import rxtxrobot.RXTXRobot;
+public class Main {
+	private static int test=0;
+	//our robots current heading or angle
+	private static int heading=85;
+	
+	//beacon 1 2 3 are the beacons that will be scaned by the robot;
+	private static beacon beacon1;
+	private static beacon beacon2;
+	private static beacon beacon3;
+	private static int[] distances=new int[3];
+	private static boolean b1d=false;
+	private static boolean b2d=false;
+	public static Servomotors IRServo;
+	//x and y are robots x and y corrdinats 
+	public Servomotors IR= new Servomotors(11);
+	public Servomotors Conduct= new Servomotors(10);
+	private static double x;
+	private static double y;
+	//desx and desy our are target x and y
+	private static double desx;
+	private static double desy;
+	public static boolean done=false;
+	public static RXTXRobot Robot = new ArduinoNano();
+	//general direction of desired heading up being 90/ left being 180/ down being 270, right being 0
+	private static int direction=90;
+	//private static int heading=85;
+	//private static Servomotors Irmotor=new Servomotors(); 
+	
+	public static void main(String[] args) {
+		//Use RunMotors.distanceMove to handle forward or backward movement
+		
+		
+		
+		
+		
+		
+		
+		/*IRServo=new Servomotors(11);
+		//RFIDSensor IR= new RFIDSensor(); //makes IR sensors object named IR
+		//Robot.setPort("/dev/tty.usbmodem15");
+		//Robot.connect();
+		RunMotors.main(args, 0);
+System.out.println(IRReadOut.ScanIR()); */
+		
+
+		//Servomotors.rotate(10);
+		//RunMotors.main(args,0);
+		//angles();
+		//triangulate();
+		/*switch(test)
+		{
+		//Rotate servo motor to angle a where it will then rotate back
+		case 0:
+			//a is the angle
+			Servomotors.main(args, a);
+			break;
+		//Read IR sensor
+		case 1:
+			IRReadOut.main(args);
+			break;
+		//Move forward 3 meters
+		case 2:
+			//0 is test type.
+			RunMotor.main(args,0);
+			break;
+		//run motor until ping sensor is trigered.
+		case 3:
+			//1 is test type
+			RunMotor.main(args,1);
+			break;
+		//get temp
+		case 4:
+			//10 indicates that the thermistor will take 10 measurments in 3 seconds that will be averaged out and converted to degrees C
+			thermistors.main(args,10);
+			break;
+		case 5:
+			break;
+			
+	}
+	*/
+		//if(finished==true)
+		//Robot.close();
+}
+	
+	
+	public static void angles() 
+	{
+	for(int a=10;a<180;a+=20) {
+		if(IRReadOut.ScanIR()==  '\u0000') {
+			//a+=20;
+			Servomotors.rotate(a);
+			//char fix=IRReadOut.ScanIR();
+			//angles();
+		}
+		if(b1d==false&&IRReadOut.valid== true) {
+			beacon1=new beacon(a,IRReadOut.tag);
+			b1d=true;
+			System.out.println("beacon1 recorded at: "+a+" with tag: "+IRReadOut.tag);
+			//a+=20;
+			
+			Servomotors.rotate(a);
+			//return angles();
+			
+			
+		}
+		else if(b1d==true&&b2d==false && IRReadOut.ScanIR()!=beacon1.charr&&IRReadOut.valid== true) {
+			beacon2=new beacon(a,IRReadOut.tag);
+			b2d=true;
+			System.out.println("beacon2 recorded at: "+a+" with tag: "+IRReadOut.tag);
+			//a+=20;
+			
+			Servomotors.rotate(a);
+			
+			
+			
+		}
+		else if(b1d==true&&b2d==true&&IRReadOut.valid== true&& IRReadOut.ScanIR()!=beacon1.charr) {
+			beacon3=new beacon(a,IRReadOut.tag);
+			System.out.println("beacon3 recorded at: "+a+" with tag: "+IRReadOut.tag);
+			//b2d=false;
+			//b1d=true;
+			break;
+			
+			
+		}
+		
+		Servomotors.rotate(a);
+	}
+		
+		System.out.println("beacon1 charr: "+beacon1.charr+" beacon1 angle: "+ beacon1.angle);
+		System.out.println("beacon2 charr: "+beacon2.charr+" beacon2 angle: "+ beacon2.angle);
+		System.out.println("beacon3 charr: "+beacon3.charr+" beacon3 angle: "+ beacon3.angle);
+	}
+	public static void triangulate() {
+		/*double l1;
+		double l2;
+		angle 1 is equal to the middle beacons angle minus our heading 
+		
+		
+		
+		
+		l1=java.lang.Math.sin(Math.toRadians(beacons[0].angle))*beacons[2].dist(beacons[1].charr)/beacons[0].dist(beacons[1].charr);
+		l2=java.lang.Math.sin(Math.toRadians(beacons[1].angle))*beacons[0].dist(beacons[2].charr)/beacons[1].dist(beacons[2].charr);
+		double x1=l1*Math.cos(Math.toRadians(90-beacons[1].angle));
+		double x2=l2*Math.cos(Math.toRadians(90-beacons[2].angle));
+		 x=16-x1-x2;
+		double y1=l1*Math.sin(Math.toRadians(90-beacons[1].angle));
+		double y2=l2*Math.sin(Math.toRadians(90-beacons[2].angle));
+		 y=32-y1-y2;
+		
+	
+		
+	 */
+		//diffrence between general direction
+		int T=beacon3.angle;
+		double a;
+		double b;
+		double c;
+		double d; 
+		
+		
+		
+	}
+		
+}
+
