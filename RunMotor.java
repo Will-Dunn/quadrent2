@@ -79,11 +79,13 @@ public class RunMotor
 		
 }
  	public static void turnRightByAngle (int angle) {
- 		int timeTurn = (int)(angle * (50 / 45)); //uses ratio to calculate time needed to turn based on the angle passed through paramters
+ 		int primitivetimeTurn = (angle * (50 / 45)); //uses ratio to calculate time needed to turn based on the angle passed through paramters
+ 		int timeTurn = primitivetimeTurn * 1000;
  		Robot.runTwoPCAMotor(motor1pin, -speed1, motor2pin, speed2, timeTurn); //turns robot right 
  	}
  	public static void turnLeftByAngle (int angle) {
- 		int timeTurn = (int)(angle * (50 / 45)); //uses ratio to calculate time needed to turn based on the angle passed through paramters
- 		Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, -speed2, 100); //turns robot left
+ 		int primitivetimeTurn = (int)(angle * (50 / 45)); //uses ratio to calculate time needed to turn based on the angle passed through paramters
+ 		int timeTurn = primitivetimeTurn * 1000;
+ 		Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, -speed2, timeTurn); //turns robot left
  	}
 }
