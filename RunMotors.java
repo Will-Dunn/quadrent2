@@ -1,106 +1,102 @@
 import rxtxrobot.ArduinoNano;
 import rxtxrobot.RXTXRobot;
 
-public class RunMotors
-{	private static RXTXRobot Robot = new ArduinoNano(); // Create RXTXRobot object
+public class RunMotors extends Main
+{	//public static RXTXRobot Robot = new ArduinoNano(); // Create RXTXRobot object
 	//time should be set to the length of time required to move 3 meters.
-	private static int time=2500;
+	public static double time=2500;
 	//motor1pin is the pin motor 1 is wired to.
-	private static int motor1pin=5;
+	public static int motor1pin=5;
 	//motor2pin is the pin motor 2 is wired to.
-	private static int motor2pin=7;
+	public static int motor2pin=7;
 	//speed1 is the speed motor 1 will move at.
-	private static int speed1=-300;
+	//motor 1's power should be 70% of what motor 2's power is
+	//public static int speed1=-350;
 	//speed2 is the speed motor 2 will move at.
-	private static int speed2=500;
+	public static int speed2=500;
+	public static int speed1=speed2*-1*(350/500);
 	//Pingpin is the pin at which the ping sensor is wired.
-	private static int Pingpin=5;
+	public static int Pingpin=5;
+	public static int Me1=2;
+	public static int Me2=3;
+		
 	//if doing ping stop test set test to 1 other wise leave as is. 
 	//private static int test=0;
 	public static void main(String[] args, int test)
 	{
-	Robot.setPort("COM6"); // Set port to COM3
-		
-		Robot.connect();
-		
-		//Run motor on channel 0 at speed 400 for 2000 milliseconds
-		//r.runPCAMotor(1, 400, 2000);`
-
-		//Run motor on channel 1 at speed 250 for infinite time
-		//r.runPCAMotor(2, 250, 0);
-
-		//Runs a motor on channel 2 at speed 100 and a motor on channel 3 at speed -200 for 5000 milliseconds
-		//.runTwoPCAMotor(7, -400, 5, 400, 5000);
-		while(test==1) {
-			contrun();
-		}
-		if (test==2) {
-			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, time);
-		//urn
-		//ry {Thread.sleep(500);}
-		/*atch (InterruptedException ex){Thread.currentThread().interrupt();}
-			Robot.runTwoPCAMotor(motor1pin, -250, motor2pin, 0, 500);
+	
+	
+		ping();
 			
-			//y {Thread.sleep(500);}
-	//catch (InterruptedException ex){Thread.currentThread().interrupt();}
-	//Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, time);*/
-			Robot.close();
-		}
-		if (test == 3) {
-			turn();
-		}
-		else
-			Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, time);
-		Robot.close();
-	}
-	public static void distancemove() {
 		
-		//Runs a motor on channel 2 at speed 100 and a motor on channel 3 at speed -200 for 5000 milliseconds
+	}
+	public static int Time(int distance) {
+		double T=2200/5;
+		T=distance*T;
+		int t=(int)T;
+		return t;
 		
 		
 	}
-	public static boolean ping() {
-		//for (int x=0; x < 20; ++x)
-	//	{
+	public static void distanceMove(int distance,int direction) {
+		//move in direction for length of time
+		//direction is either positive or negative switching our direction
+		Robot.runTwoPCAMotor( motor1pin,  speed1*direction,  motor2pin,  speed2*direction,  Time(distance));
+		if(ping()) {
+			Robot.allPCAStop();}
+		Robot.allPCAStop();
+		Robot.sleep(1000);
 		
-			if(Robot.getPing(Pingpin)<20)
-				return true;
-			//Robot.sleep(300);
-		//}
-		return false;
+		
 		
 	}
-	public static void contrun() {
-	int numturns=0;
-	while(!ping()) {
-			Robot.runTwoPCAMotor(motor1pin, speed1,motor2pin,speed2, 5);
-			System.out.println("movingforward");
-		}
-	if(ping()) {
+	public static void timed(int time,int direction) {
+		//move in direction for length of time
+		//direction is either positive or negative switching our direction
+		Robot.runTwoPCAMotor( motor1pin,  speed1*direction,  motor2pin,  speed2*direction,  time);
+		//if(ping()) {
+		//	Robot.allPCAStop();}
+		Robot.allPCAStop();
+		Robot.sleep(100);
 		
-		turn();
-		numturns++;
+		
+		
 	}
-	else {
-	System.out.println("turning back");
-	Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, speed2, 200);
-	Robot.runTwoPCAMotor(motor1pin,-speed1, motor2pin, speed2,100*numturns);
+	public static int ping() {
+		return Robot.getPing(Pingpin);
+		
 	}
+	
 		
 				
 			
 		
-		//rn();
-		//bot.allPCAStop();
-	}
-	public static void turn() {
-	//f (ping()) {
-			Robot.runTwoPCAMotor(motor1pin,speed1, motor2pin,-speed2, 100);
-			System.out.println("turning "+Robot.getPing(Pingpin));
-			Robot.sleep(2000);
+		
 			
 			
-	
+	public static void holdpos(int time) {
+		Robot.runTwoPCAMotor( motor1pin,  100,  motor2pin,  350,  time);
+		
 		
 	}
+		
+	
+	public static void turnRightByAngle (int angle) {
+		
+//turn right
+		
+ 		int timeTurn = (int)(angle *6); //uses ratio to calculate time needed to turn based on the angle passed through paramters
+ 		Robot.runTwoPCAMotor(motor1pin, -speed1, motor2pin, speed2, timeTurn); //turns robot right 
+ 		Robot.sleep(1000);
+ 		
+ 	}
+ 	public static void turnLeftByAngle (int angle) {
+//turn left 
+		
+		
+ 		int timeTurn = (int)(angle * 2); //uses ratio to calculate time needed to turn based on the angle passed through paramters
+ 		Robot.runTwoPCAMotor(motor1pin, speed1, motor2pin, -speed2, timeTurn); //turns robot left
+ 		Robot.sleep(1000);
+ 	
+ 	}
 }

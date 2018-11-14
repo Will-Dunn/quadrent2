@@ -1,16 +1,17 @@
+
 import rxtxrobot.*;
 public class Servomotors extends Main {
 	//public static RXTXRobot Robot = new ArduinoNano();
-	public static int pin;
+	//public static int pin;
 	
-	public Servomotors(int Pin) {
+	public static void main () {
 		//Robot.setPort("COM6");	
-		pin=Pin;
+		
 		
 	}
-	public static void rotate(int angle) {
-		Robot.setPort("/dev/tty.usbmodem14111");
-		Robot.connect();
+	public static void rotate(int pin ,int angle) {
+		//Robot.setPort("/dev/tty.usbmodem14101");
+		//Robot.connect();
 		
 		//Robot.runPCAServo(11, 10 );
 		//Robot.sleep(1000);
@@ -18,7 +19,7 @@ public class Servomotors extends Main {
 		//Robot.sleep(1000);
 		//Robot.runPCAServo(11, 10 );
 		//Robot.sleep(1000);
-		Robot.close();
+		//Robot.close();
 		//robot is the Arduino board instantiated in Main class
 		//sets com port 3 to be input port
 		
